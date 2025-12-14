@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronologie du Métro Parisien</title>
+    <meta name="description" content="Explorez l'histoire de la construction du réseau du métro de Paris.">
+    
+    <!-- 1. FEUILLES DE STYLE -->
+    <!-- Style de base de Leaflet (OBLIGATOIRE) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+    <!-- Style de TimelineJS (OBLIGATOIRE) -->
+    <link title="timeline-styles" rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
+    <!-- Votre style personnalisé -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- 2. FAVICON (optionnel mais recommandé) -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+    <!-- EN-TÊTE DE L'APPLICATION -->
+    <header>
+        <h1>🛤️ Histoire du Métro Parisien</h1>
+        <p class="subtitle">Parcourez plus de 120 ans d'expansion du réseau. Utilisez la chronologie ci-dessous pour voyager dans le temps.</p>
+    </header>
+
+    <!-- CONTENU PRINCIPAL : Carte et Contrôles -->
+    <main>
+        <!-- Section de la carte interactive -->
+        <section id="map-section">
+            <div class="section-header">
+                <h2>Carte Évolutive du Réseau</h2>
+                <div id="current-date-display"><strong>Date visualisée :</strong> <span id="date-text">1900</span></div>
+            </div>
+            <!-- Le conteneur où Leaflet dessinera la carte -->
+            <div id="map"></div>
+            <!-- Légende pour les couleurs des lignes (sera remplie par JS) -->
+            <div id="map-legend" class="legend">
+                <h3>Légende</h3>
+                <div id="legend-content">Chargement...</div>
+            </div>
+        </section>
+
+        <!-- Section latérale pour les informations contextuelles -->
+        <aside id="info-panel">
+            <h3>Contexte Historique</h3>
+            <div id="slide-info">
+                <p>Sélectionnez une année sur la chronologie pour voir l'état du réseau à cette date et les événements marquants.</p>
+            </div>
+            <div class="controls">
+                <h3>Filtres</h3>
+                <div class="filter-option">
+                    <input type="checkbox" id="toggle-stations" checked>
+                    <label for="toggle-stations">Afficher les stations</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="toggle-lines" checked>
+                    <label for="toggle-lines">Afficher les lignes</label>
+                </div>
+                <button id="btn-reset-view">Réinitialiser la vue</button>
+            </div>
+        </aside>
+    </main>
+
+    <!-- SECTION DE LA CHRONOLOGIE -->
+    <section id="timeline-section">
+        <h2>Chronologie de Construction</h2>
+        <!-- Conteneur où TimelineJS s'affichera -->
+        <div id="timeline-embed"></div>
+        <!-- Contrôles manuels simplifiés pour la date -->
+        <div class="timeline-controls">
+            <button id="timeline-prev">◀ Année précédente</button>
+            <input type="range" id="year-slider" min="1900" max="2025" value="1900" step="1">
+            <span id="slider-year">1900</span>
+            <button id="timeline-next">Année suivante ▶</button>
+        </div>
+    </section>
+
+    <!-- PIED DE PAGE -->
+    <footer>
+        <p>
+            Données historiques compilées depuis Wikipédia et la RATP. 
+            Carte de fond © <a href="https://www.openstreetmap.org/copyright" target="_blank">Contributeurs OpenStreetMap</a>. 
+            Réalisé avec <a href="https://leafletjs.com/" target="_blank">Leaflet</a> et 
+            <a href="https://timeline.knightlab.com/" target="_blank">TimelineJS</a>.
+        </p>
+    </footer>
+
+    <!-- 3. SCRIPTS JAVASCRIPT -->
+    <!-- Bibliothèque Leaflet (OBLIGATOIRE) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+    <!-- Bibliothèque TimelineJS (OBLIGATOIRE) -->
+    <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+    <!-- Vos scripts personnalisés -->
+    <!-- Assurez-vous de créer ces fichiers dans votre dossier /js -->
+    <script src="js/data.js"></script> <!-- Contiendra votre tableau `allStations` -->
+    <script src="js/syncEngine.js"></script> <!-- Contiendra `updateMapToDate` -->
+    <script src="js/main.js"></script> <!-- Contiendra l'initialisation et la logique générale -->
+</body>
+</html>
